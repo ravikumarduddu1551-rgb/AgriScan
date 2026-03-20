@@ -1,0 +1,18 @@
+# Environment Variables (NEVER PUSH THIS!)
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Uploads folder (Don't push user data)
+uploads/
+
+# Local test scripts & Logs that we used during development
+server.log
+api_output.txt
+models.txt
+style_diff.txt
+test_api.py
+list_models.py
+result.json

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroScan AI - Crop Disease Detection</title>
+    <!-- Add Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-leaf"></i>
+                <h1>AgroScan AI</h1>
+            </div>
+            <p class="subtitle">Intelligent Crop Disease Detection</p>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Instructions Panel -->
+            <section class="instructions-panel glass-panel mb-4">
+                <h3><i class="fa-solid fa-clipboard-list"></i> How to use AgroScan</h3>
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <p><strong>Upload:</strong> Provide a clear photo of the diseased plant leaf.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <p><strong>Describe (Optional):</strong> Add context like "Yellow spots" or duration.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <p><strong>Analyze:</strong> Our AI will detect the condition and suggest a cure!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upload Section -->
+            <section class="upload-section glass-panel">
+                <div class="upload-area" id="upload-area">
+                    <input type="file" id="file-input" accept="image/*" hidden>
+                    <div class="upload-icon">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+                    <h3>Drag & Drop your crop image here</h3>
+                    <p>or</p>
+                    <button class="btn primary-btn" onclick="document.getElementById('file-input').click()">Browse Files</button>
+                    <p class="file-hint">Supports JPG, PNG (Max 16MB)</p>
+                </div>
+
+                <!-- Preview State -->
+                <div class="preview-area hidden" id="preview-area">
+                    <div class="image-preview-container">
+                        <img id="image-preview" src="" alt="Crop Preview">
+                        <button class="btn-icon remove-img" id="remove-img" title="Remove image">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="user-notes-container">
+                        <label for="user-notes"><i class="fa-solid fa-pen-to-square"></i> Additional Details (Optional)</label>
+                        <textarea id="user-notes" rows="3" placeholder="Describe any symptoms, e.g., 'Started 2 days ago' or 'Found mostly on bottom leaves'"></textarea>
+                    </div>
+                    
+                    <button class="btn action-btn" id="analyze-btn">
+                        <span>Analyze Crop</span>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <section class="loading-state hidden" id="loading-state">
+                <div class="spinner"></div>
+                <p>Analyzing image with AI...</p>
+                <p class="loading-subtext">This might take a few seconds.</p>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="results-section">
+                <div class="results-header">
+                    <h2>Analysis Report</h2>
+                    <span class="badge" id="severity-badge">High Severity</span>
+                </div>
+                
+                <div class="results-grid">
+                    <div class="result-card glass-panel">
+                        <div class="card-icon"><i class="fa-solid fa-seedling"></i></div>
+                        <div class="card-content">
+                            <h4>Plant Type</h4>
+                            <p id="res-plant">Tomato</p>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card glass-panel">
+                        <div class="card-icon"><i class="fa-solid fa-virus"></i></div>
+                        <div class="card-content">
+                            <h4>Detected Condition</h4>
+                            <p id="res-disease">Late Blight</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details-panel glass-panel">
+                    <h3><i class="fa-solid fa-circle-info"></i> Description & Symptoms</h3>
+                    <p id="res-description">Description goes here.</p>
+                    
+                    <h3 class="mt-4"><i class="fa-solid fa-microscope"></i> Disease Details</h3>
+                    <p id="res-details">In-depth details go here.</p>
+
+                    <h3 class="mt-4 text-alert"><i class="fa-solid fa-triangle-exclamation"></i> Immediate Action</h3>
+                    <p id="res-immediate-action">Immediate actions go here.</p>
+                    
+                    <h3 class="mt-4"><i class="fa-solid fa-notes-medical"></i> Treatment & Cure</h3>
+                    <p id="res-treatment">Treatment guidelines go here.</p>
+                    
+                    <h3 class="mt-4"><i class="fa-solid fa-shield-virus"></i> Prevention & Precautions</h3>
+                    <p id="res-precautions">Prevention guidelines go here.</p>
+                </div>
+                
+                <div class="actions-row">
+                    <button class="btn outline-btn" id="reset-btn">Analyze Another Image</button>
+                </div>
+            </section>
+
+            <!-- Error State -->
+            <section class="error-state hidden" id="error-state">
+                <i class="fa-solid fa-triangle-exclamation error-icon"></i>
+                <h3>Analysis Failed</h3>
+                <p id="error-message">Something went wrong.</p>
+                <button class="btn outline-btn mt-4" id="retry-btn">Try Again</button>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
